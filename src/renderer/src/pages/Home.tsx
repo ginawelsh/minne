@@ -686,7 +686,8 @@ export default function Home(): React.ReactElement {
     setShowNewDeck(true)
   }
 
-  const ungroupedDecks = decks.filter((d) => !d.languageId)
+  const knownLanguageIds = new Set(languages.map((l) => l.id))
+  const ungroupedDecks = decks.filter((d) => !d.languageId || !knownLanguageIds.has(d.languageId))
   const hasContent = decks.length > 0 || languages.length > 0
 
   return (

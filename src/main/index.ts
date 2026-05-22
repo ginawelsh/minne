@@ -3,9 +3,31 @@ import { join, extname } from 'path'
 import { readFileSync, writeFileSync, existsSync, mkdirSync, copyFileSync, unlinkSync } from 'fs'
 
 const DATA_FILE_NAME = 'minne-data.json'
+const SETTINGS_FILE_NAME = 'minne-settings.json'
 
 function getDataPath(): string {
   return join(app.getPath('userData'), DATA_FILE_NAME)
+}
+
+function migrateFromFlashflow(): void {
+  const newDataPath = getDataPath()
+  if (existsSync(newDataPath)) return
+
+  const appData = app.getPath('appData')
+  const oldDataPath = join(appData, 'flashflow', 'flashflow-data.json')
+  const oldSettingsPath = join(appData, 'flashflow', 'flashflow-settings.json')
+  const newDir = app.getPath('userData')
+
+  if (!existsSync(newDir)) mkdirSync(newDir, { recursive: true })
+
+  if (existsSync(oldDataPath)) {
+    try { copyFileSync(oldDataPath, newDataPath) } catch { /* ignore */ }
+  }
+
+  const newSettingsPath = join(newDir, SETTINGS_FILE_NAME)
+  if (!existsSync(newSettingsPath) && existsSync(oldSettingsPath)) {
+    try { copyFileSync(oldSettingsPath, newSettingsPath) } catch { /* ignore */ }
+  }
 }
 
 function createWindow(): void {
@@ -52,10 +74,11 @@ ipcMain.handle('db:load', () => {
       decks: parsed.decks || [],
       cards: parsed.cards || [],
       streak: parsed.streak || 0,
-      lastStudyDate: parsed.lastStudyDate || ''
+      lastStudyDate: parsed.lastStudyDate || '',
+      languages: parsed.languages || []
     }
   } catch {
-    return { decks: [], cards: [], streak: 0, lastStudyDate: '' }
+    return { decks: [], cards: [], streak: 0, lastStudyDate: '', languages: [] }
   }
 })
 
@@ -226,6 +249,7 @@ ipcMain.handle('window:close', (event) => {
 })
 
 app.whenReady().then(() => {
+  migrateFromFlashflow()
   createWindow()
 
   app.on('activate', function () {
