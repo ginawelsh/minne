@@ -1,7 +1,8 @@
 {
-  "name": "flashflow",
+  "name": "minne",
+  "productName": "Minne",
   "version": "1.0.0",
-  "description": "Beautiful spaced repetition flashcard app",
+  "description": "Spaced repetition language learning app",
   "main": "out/main/index.js",
   "scripts": {
     "dev": "electron-vite dev",

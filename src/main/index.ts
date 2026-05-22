@@ -2,7 +2,7 @@ import { app, shell, BrowserWindow, ipcMain, dialog, net } from 'electron'
 import { join, extname } from 'path'
 import { readFileSync, writeFileSync, existsSync, mkdirSync, copyFileSync, unlinkSync } from 'fs'
 
-const DATA_FILE_NAME = 'flashflow-data.json'
+const DATA_FILE_NAME = 'minne-data.json'
 
 function getDataPath(): string {
   return join(app.getPath('userData'), DATA_FILE_NAME)
@@ -128,7 +128,7 @@ ipcMain.handle('csv:open-dialog', async (event) => {
 // ─── Settings ────────────────────────────────────────────────────────────────
 
 function getSettingsPath(): string {
-  return join(app.getPath('userData'), 'flashflow-settings.json')
+  return join(app.getPath('userData'), 'minne-settings.json')
 }
 
 function loadSettings(): Record<string, string> {

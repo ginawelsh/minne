@@ -694,7 +694,7 @@ export default function Home(): React.ReactElement {
       {/* Header */}
       <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="mb-8 flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-semibold text-[#e8e0f5] tracking-tight">Flashflow</h1>
+          <h1 className="text-2xl font-semibold text-[#e8e0f5] tracking-tight">Minne</h1>
           <p className="text-sm text-[#6a5c8a] mt-0.5">Spaced repetition</p>
         </div>
         {streak > 0 && (

@@ -1,6 +1,8 @@
-# Flashflow
+# Minne
 
-A desktop spaced repetition flashcard app built with Electron, React, and TypeScript. Organise your study material by language, generate AI voices with ElevenLabs, and let the SM-2 algorithm schedule reviews automatically.
+*Minne* — Old Norse & Scandinavian for *memory*.
+
+A desktop spaced repetition app for language learners, built with Electron, React, and TypeScript. Organise your study material by language, generate AI voices with ElevenLabs, and let the SM-2 algorithm schedule reviews automatically.
 
 ---
 
@@ -31,8 +33,8 @@ A desktop spaced repetition flashcard app built with Electron, React, and TypeSc
 
 ```bash
 # 1. Clone the repo
-git clone https://github.com/ginawelsh/flashflow.git
-cd flashflow
+git clone https://github.com/ginawelsh/minne.git
+cd minne
 
 # 2. Install dependencies
 npm install
@@ -60,7 +62,7 @@ npm run build
 ## Project structure
 
 ```
-flashflow/
+minne/
 ├── src/
 │   ├── main/          # Electron main process (IPC, file I/O, ElevenLabs API)
 │   ├── preload/       # Context bridge — exposes safe APIs to the renderer
@@ -97,9 +99,9 @@ All decks, cards, and study history are saved to a single JSON file in your OS a
 
 | OS | Path |
 |----|------|
-| Windows | `%APPDATA%\flashflow\flashflow-data.json` |
-| macOS | `~/Library/Application Support/flashflow/flashflow-data.json` |
-| Linux | `~/.config/flashflow/flashflow-data.json` |
+| Windows | `%APPDATA%\minne\minne-data.json` |
+| macOS | `~/Library/Application Support/minne/minne-data.json` |
+| Linux | `~/.config/minne/minne-data.json` |
 
 Audio files are stored alongside the JSON in an `audio/` subfolder.
 
