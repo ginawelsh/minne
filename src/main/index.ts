@@ -63,9 +63,10 @@ function createWindow(): void {
 }
 
 ipcMain.handle('db:load', () => {
+  migrateFromFlashflow()
   const dataPath = getDataPath()
   if (!existsSync(dataPath)) {
-    return { decks: [], cards: [], streak: 0, lastStudyDate: '' }
+    return { decks: [], cards: [], streak: 0, lastStudyDate: '', languages: [] }
   }
   try {
     const raw = readFileSync(dataPath, 'utf-8')
@@ -249,7 +250,6 @@ ipcMain.handle('window:close', (event) => {
 })
 
 app.whenReady().then(() => {
-  migrateFromFlashflow()
   createWindow()
 
   app.on('activate', function () {
